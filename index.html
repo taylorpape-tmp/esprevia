@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SheBrew - Coffee That Syncs With Your Cycle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="beta-container">
+        <nav class="beta-nav">
+            <div class="nav-content">
+                <div class="logo">Esprévia</div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#" onclick="showNewsletter(); return false;">Join</a>
+                    <a href="mailto:contact@esprévia.com">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="headline">Coffee.<br>for Women,<br>Made by Women</h1>
+                <p class="subheadline"><em>Get early access to the world's first menstrual cycle coffee - 4 unique K-cups infused with targeted supplements to support you through every phase of your month.</em></p>
+                <div class="cta-section">
+                    <button class="cta-button primary" onclick="showNewsletter()">
+                        <span>Join Beta Waitlist</span>
+                    </button>
+                    <div class="newsletter-popup" id="newsletter-popup" style="display: none;">
+                        <h3 class="popup-title">Get early access to updates, exclusive content, and help us shape a new generation of coffee!</h3>
+                        <form class="popup-form" id="popup-form">
+                            <div class="popup-input-group">
+                                <input type="email" placeholder="Email Address" required class="popup-input">
+                                <button type="submit" class="popup-button">
+                                    <span>GET BETA ACCESS</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="footer-text">© 2025 Esprévia. All rights reserved. | <a href="mailto:contact@esprévia.com" class="footer-link">contact@esprévia.com</a></p>
+            </div>
+        </footer>
+
+
+
+
+
+
+
+    </div>
+
+    <script>
+        function showNewsletter() {
+            const popup = document.getElementById('newsletter-popup');
+            popup.style.display = 'block';
+            setTimeout(() => {
+                document.querySelector('.popup-input').focus();
+            }, 100);
+        }
+
+        document.getElementById('beta-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const button = this.querySelector('button');
+            const email = this.querySelector('input[type="email"]').value;
+            
+            button.innerHTML = '<span>Adding you to the waitlist...</span>';
+            button.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                button.innerHTML = '<span>✓ Welcome to Beta!</span>';
+                button.style.background = 'linear-gradient(135deg, #c4a484 0%, #a67c5a 100%)';
+                
+                setTimeout(() => {
+                    const form = this;
+                    form.innerHTML = '<div class="success-message"><h3>Welcome to the SheBrew Beta!</h3><p>Thank you for joining our waitlist. We\'ll keep you updated on our development progress and notify you when beta testing begins.</p><p class="next-steps">Next: Look for our welcome email with more details about the beta program.</p></div>';
+                }, 1500);
+            }, 2000);
+        });
+
+        // Animate moon phases
+        document.addEventListener('DOMContentLoaded', function() {
+            const phases = document.querySelectorAll('.moon-phase');
+            phases.forEach((phase, index) => {
+                phase.style.animationDelay = `${index * 0.8}s`;
+            });
+
+            // Add scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.phase-card, .benefit-item, .transparency-item').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
